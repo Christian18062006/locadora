@@ -3,6 +3,10 @@
 internal interface ILocadora
 {
     string NomeLocadora { get; }
-    void AdicionarVeiculo(Veiculos veiculo);
-    Dictionary<string, Veiculos> ListarVeiculos();
+    void AdicionarVeiculosDisponiveis( Veiculos veiculo);
+    Dictionary<string, Veiculos> ListarVeiculosDisponiveis();
+    void RemoverVeiculoDisponivel(string placa);
+    void AdicionarVeiculosAlugados(Veiculos veiculo);
+    Dictionary<string, Veiculos> ListarVeiculosAlugados();
+    void RemoverVeiculosAlugados(string placa);
 }
