@@ -32,6 +32,7 @@ NomeLocadora = nomeLocadora;
             }
             else
             {
+            Console.WriteLine("Veículo adicionado.");
                 veiculosDisponiveis.Add(veiculo.Placa, veiculo);
             }
         }
@@ -49,7 +50,7 @@ NomeLocadora = nomeLocadora;
     {
             foreach (var item in veiculosDisponiveis)
             {
-                Console.WriteLine(item.Key);
+                Console.WriteLine(item.Value.ExibirDetalhes());
                 
             }
         }
