@@ -3,7 +3,7 @@
     internal class Carro:Veiculos
     {
         public int QuantidadePortas { get; }
-        public Carro(String marca, String modelo, int anoFabricacao, double valorLocacao, int quantidadePortas):base(marca,modelo,anoFabricacao,valorLocacao)
+        public Carro(String marca, String modelo, int anoFabricacao, double valorLocacao, bool transmicaoAutomatica, bool eletrico, int quantidadePortas):base(marca,modelo,anoFabricacao,valorLocacao,transmicaoAutomatica,eletrico)
         {
 QuantidadePortas = quantidadePortas;
         }
