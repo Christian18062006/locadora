@@ -3,7 +3,7 @@
 internal class Caminhao:Veiculos
 {
     public int CargaSuportada { get;}
-    public Caminhao(String marca, string modelo, int anoFabricacao, double valor, bool transmicao, bool eletrico, int cargaSuportada):base(marca,modelo,anoFabricacao,valor,transmicao,eletrico)
+    public Caminhao(string marca, string modelo, int anoFabricacao, double valor, bool transmicao, bool eletrico, int cargaSuportada):base(marca,modelo,anoFabricacao,valor,transmicao,eletrico)
     {
         CargaSuportada = cargaSuportada;
     }

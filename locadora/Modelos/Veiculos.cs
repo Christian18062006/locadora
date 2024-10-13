@@ -2,13 +2,13 @@
 
 internal class Veiculos
 {
-    public String Marca { get; }
+    public string Marca { get; }
     public int Ano { get; }
-    public String Modelo { get; }
+    public string Modelo { get; }
     public double ValorLocacao { get;}
     public bool TransmicaoAutomatica { get;}
     public bool Eletrico { get; }
-    public Veiculos(String marca, String modelo, int ano, double valorLocacao,bool transmicaoAutomatica, bool Eletrico)
+    public Veiculos(string marca, string modelo, int ano, double valorLocacao,bool transmicaoAutomatica, bool eletrico)
     {
         Marca = marca;
         Modelo = modelo;
@@ -17,7 +17,7 @@ internal class Veiculos
         Eletrico = Eletrico;
         TransmicaoAutomatica=TransmicaoAutomatica;
     }
-    public virtual String ExibirDetalhes()
+    public virtual string ExibirDetalhes()
     {
         if (TransmicaoAutomatica == false && Eletrico == false)
         {
