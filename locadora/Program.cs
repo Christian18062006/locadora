@@ -13,9 +13,9 @@ internal class Program
         while (true)
         {
             Console.WriteLine("Escolha a sua opção!");
-            Console.WriteLine("\n 1: Adicionar veículos  disponíveis. \n 2: Adicionar veículos alugados. \n 3: listar veículos disponíveis. \n 4: listar veículos alugados. \n 5: Fechar o sistema.");
+            Console.WriteLine("\n 1: Adicionar veículos  disponíveis. \n 2: Adicionar veículos alugados. \n 3: listar veículos disponíveis. \n 4: listar veículos alugados. \n 5: Devover veículo. \n 6: Retirar veículo dos veículos disponíveis para alocação. Digite -1 para sair.");
             int opcao = int.Parse(Console.ReadLine()!);
-            switch (opcao)
+switch (opcao)
             {
                 case 1:
                     {
@@ -39,9 +39,19 @@ internal class Program
                     }
                     case 5:
                     {
-                        Console.WriteLine("Até a próxima!");
+                        DevolverVeiculo.Devolver(locadora);
                         break;
                     }
+                    case 6:
+                    {
+                        RetirarVeiculoDisponivel.RetirarVeiculo(locadora);
+                        break;
+                    }
+                case -1:
+                    {
+                        FecharSystem.Fechar(locadora);
+                        return;
+                                            }
                 default:
                     {
                         Console.WriteLine("Opção incorreta.");
