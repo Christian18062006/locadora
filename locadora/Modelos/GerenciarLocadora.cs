@@ -1,78 +1,92 @@
-﻿
-namespace locadora.Modelos;
+﻿namespace locadora.Modelos;
 
 internal class GerenciarLocadora : ILocadora
 {
-    private Dictionary<string,Veiculos> veiculosDisponiveis= new Dictionary<string,Veiculos>();
-    private Dictionary<string,Veiculos> veiculosAlugados= new Dictionary<string,Veiculos>();
+    private Dictionary<string, Veiculos> veiculosDisponiveis = new Dictionary<string, Veiculos>();
+    private Dictionary<string, Veiculos> veiculosAlugados = new Dictionary<string, Veiculos>();
+
     public string NomeLocadora { get; }
-public GerenciarLocadora(string nomeLocadora)
+
+    public GerenciarLocadora(string nomeLocadora)
     {
-NomeLocadora = nomeLocadora;
+        NomeLocadora = nomeLocadora;
     }
 
-    public void AdicionarVeiculosAlugados(Veiculos veiculo)
+    public void AdicionarVeiculosAlugados(string placa)
     {
-        if (veiculosDisponiveis.ContainsKey(veiculo.Placa) && !veiculosAlugados.ContainsKey(veiculo.Placa))
+        if (veiculosDisponiveis.ContainsKey(placa) && !veiculosAlugados.ContainsKey(placa))
         {
-            veiculosAlugados.Add(veiculo.Placa, veiculo);
-            veiculosDisponiveis.Remove(veiculo.Placa);
+            var veiculo = veiculosDisponiveis[placa];
+            veiculo.AtualizarStatus(false);
+            veiculosAlugados.Add(placa, veiculo);
+            veiculosDisponiveis.Remove(placa);
+
+            Console.WriteLine("Veículo alugado com sucesso!");
         }
         else
         {
-            Console.WriteLine("O veículo não pode ser adicionado, verifique se ele está disponível.");
+            Console.WriteLine("O veículo não pode ser alugado, verifique se ele está disponível.");
         }
     }
 
     public void AdicionarVeiculosDisponiveis(Veiculos veiculo)
     {
-            if (veiculosAlugados.ContainsKey(veiculo.Placa))
-                {
-                Console.WriteLine("O veículo está sendo alocado no momento.");
-            }
-            else
-            {
-            Console.WriteLine("Veículo adicionado.");
-                veiculosDisponiveis.Add(veiculo.Placa, veiculo);
-            }
+        if (veiculosAlugados.ContainsKey(veiculo.Placa))
+        {
+            Console.WriteLine("O veículo está alugado no momento.");
         }
-    public void ListarVeiculosAlugados()
-    {
-            foreach (var item in veiculosAlugados)
-            {
-                Console.WriteLine(item.Key);
-
-            }
-
+        else if (veiculosDisponiveis.ContainsKey(veiculo.Placa))
+        {
+            Console.WriteLine("O veículo já está disponível.");
+        }
+        else
+        {
+            veiculo.AtualizarStatus(true);
+            veiculosDisponiveis.Add(veiculo.Placa, veiculo);
+            Console.WriteLine("Veículo adicionado com sucesso à lista de disponíveis.");
+        }
     }
 
-    public void ListarVeiculosDisponiveis()
+    public Dictionary<string, Veiculos> ListarVeiculosAlugados()
     {
-            foreach (var item in veiculosDisponiveis)
-            {
-                Console.WriteLine(item.Value.ExibirDetalhes());
-                
-            }
-        }
+        return veiculosAlugados;
+    }
+
+    public Dictionary<string, Veiculos> ListarVeiculosDisponiveis()
+    {
+        return veiculosDisponiveis;
+    }
+
     public void RemoverVeiculoDisponivel(string placa)
+    {
+        if (veiculosDisponiveis.ContainsKey(placa))
         {
-            if (veiculosAlugados.ContainsKey(placa))
-            {
-                Console.WriteLine ("O veículo está em alocação.");
-            }
-            else if(veiculosDisponiveis.ContainsKey(placa)){
-                veiculosDisponiveis.Remove(placa);
-            }
+            veiculosDisponiveis.Remove(placa);
+            Console.WriteLine("Veículo removido da lista de disponíveis.");
         }
+        else if (veiculosAlugados.ContainsKey(placa))
+        {
+            Console.WriteLine("O veículo está alugado, não pode ser removido dos disponíveis.");
+        }
+        else
+        {
+            Console.WriteLine("Veículo não encontrado na lista de disponíveis.");
+        }
+    }
+
     public void RemoverVeiculosAlugados(string placa)
     {
-if(veiculosAlugados.ContainsKey(placa))
-                 {
-            veiculosAlugados.Remove(placa);
-            }
-else
+        if (veiculosAlugados.ContainsKey(placa))
         {
-            Console.WriteLine("O veículo não está na lista de disponíveis por isso não pode ser removido.");
+            var veiculo = veiculosAlugados[placa];
+            veiculo.AtualizarStatus(true);
+            veiculosAlugados.Remove(placa);
+            veiculosDisponiveis.Add(placa, veiculo);
+            Console.WriteLine("Veículo devolvido e agora está disponível para aluguel.");
+        }
+        else
+        {
+            Console.WriteLine("O veículo não está na lista de alugados.");
         }
     }
 }

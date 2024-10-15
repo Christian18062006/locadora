@@ -22,9 +22,24 @@ internal class Program
                         AdicionarVeiculo.Adicionar(locadora);
                         break;
                     }
+                    case 2:
+                    {
+                        AdicionarVeiculoAlugado.Adicionar(locadora);
+                        break;
+                    }
                 case 3:
                     {
-                        ListarVeiculosDisponiveisMenu.ListarVeiculosDisponiveis(locadora);
+                        ListarVeiculosDisponiveis.ListarVeiculos(locadora);
+                        break;
+                    }
+                    case 4:
+                    {
+                        ListarVeiculosAlugados.ListarVeiculos(locadora);
+                        break;
+                    }
+                    case 5:
+                    {
+                        Console.WriteLine("Até a próxima!");
                         break;
                     }
                 default:

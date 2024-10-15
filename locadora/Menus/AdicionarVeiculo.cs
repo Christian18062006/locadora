@@ -4,6 +4,7 @@ namespace locadora.Menus;
 
 internal class AdicionarVeiculo
 {
+
     public static void Adicionar(GerenciarLocadora locadora)
     {
         var veiculo = ObterDados();
